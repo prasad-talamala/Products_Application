@@ -1,0 +1,29 @@
+.top-navigation-bar {
+    background-color: cyan;
+    padding: 4px 4px;;
+    color: #161aec;
+}
+
+.top-navigation-bar a {
+    color: #ec7616;
+    display: inline-block;
+    text-align: left;
+    padding: 4px 4px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family-sans-serif: sans-serif;
+}
+
+.top-navigation-bar a:hover {
+    background-color: rgb(146, 168, 139);
+    color: rgb(245, 249, 250);
+}
+
+.top-navigation-bar a.active {
+    background-color: #eaf5ea;
+    color: rgb(250, 26, 164);
+}
+
+.top-navigation-bar .icon {
+    display: none;
+}

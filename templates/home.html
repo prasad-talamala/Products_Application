@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Django App</title>
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        /* Add padding to containers */
+        .container {
+          padding: 50px;
+          width: 50%;
+        }
+    </style>
+</head>
+<body>
+<h2>Django App</h2>
+<div>
+    <form>
+        <div class="container signin">
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
+        </div>
+
+        <div class="container signin">
+            <a href="{% url 'register' %}" class="btn btn-primary ml-2">Registration</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

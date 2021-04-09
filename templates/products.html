@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+    </style>
+
+    {% if user.is_authenticated %}
+    <h3>Hello, {{user.first_name}}</h3>
+    <h3><a href="{% url 'logout' %}">Logout</a></h3>
+    {% else %}
+    <h3><a href="{% url 'register' %}">Register</a></h3>
+    <h3><a href="{% url 'login' %}">Sign in</a></h3>
+    {% endif %}
+</head>
+<body>
+
+<h2>Products Table</h2>
+
+<a href="{% url 'addproduct' %}">Add a Product</a>
+
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name of the Product</th>
+        <th>Price of the Product</th>
+        <th>Added by User</th>
+    </tr>
+    {% for each in data %}
+    <tr>
+        <td>{{each.id}}</td>
+        <td>{{each.name}}</td>
+        <td>{{each.price}}</td>
+        <td>{{each.username}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
+
+<div>
+
+
+</div>

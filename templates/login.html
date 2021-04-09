@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 50px;
+  width: 50%;
+  margin: auto;
+  display: table;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] , input[type=text], input[type=password]  {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=number]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 15%;
+  opacity: 0.9;
+}
+
+/* Set a style for the submit button */
+.resetbtn {
+  background-color: #FF0000;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 15%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 10;
+}
+
+.resetbtn:hover {
+  opacity: 10;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+<form action="login" method="POST">
+
+    {% csrf_token %}
+
+    <div class="container">
+        <h3><a href="{% url 'home' %}">Home</a></h3>
+        <h1>Sign-in Here</h1>
+        <p>Please use your username and password to login.</p>
+        <hr>
+
+        <label for="username"><b>Username
+            <span class="required-field">*</span></b></label>
+        <input type="text" placeholder="Enter your username" name="username" required>
+
+        <label for="password"><b>Password
+            <span class="required-field">*</span></b></label>
+        <input type="password" placeholder="Enter your Password" name="password" required>
+        <hr>
+
+        <button type="submit" class="registerbtn">Sign in</button>
+        <button type="reset" class="resetbtn">Reset</button>
+    </div>
+
+    <div class="container signin">
+        <p>Dont have an account? please <a href="{% url 'register' %}">Register</a></p>
+    </div>
+</form>
+
+</body>
+</html>

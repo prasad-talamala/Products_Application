@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, re_path
 
 from products import views
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path("login", views.login, name="login"),
     path("logout", views.logout, name="logout"),
     path("addproduct", views.addproduct, name="addproduct"),
-    url(r'^products/(?:(?P<user_data>\w{1,}))?$', views.products, name="products"),
+    path("products", views.products, name="products"),
+    re_path(r'^delproduct/(?P<id>\d+)$', views.delproduct, name='delproduct'),
 ]

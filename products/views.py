@@ -1,8 +1,10 @@
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from products.models import Product
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 # Create your views here.
@@ -55,11 +57,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            try:
-                user_data = User.objects.get(username=username)
-            except:
-                user_data = None
-            return redirect("products", user_data)
+            return redirect("products")
         else:
             return redirect("login")
 
@@ -67,19 +65,28 @@ def login(request):
         return render(request, "login.html")
 
 
-def products(request, user_data):
-    if request.method == "POST":
+def add_pagination(request, all_data):
+    page = request.GET.get('page', 1)
+    paginator = Paginator(all_data, 10)
+    try:
+        all_data = paginator.page(page)
+    except PageNotAnInteger:
+        all_data = paginator.page(1)
+    except EmptyPage:
+        all_data = paginator.page(paginator.num_pages)
+    return all_data
 
+
+def products(request):
+    if request.method == "POST":
         name = request.POST.get("name")
         price = request.POST.get("price")
-        username = user_data
 
-        Product.objects.create(name=name, price=price, username=user_data)
+        Product.objects.create(name=name, price=price, username=request.user.get_full_name())
         return redirect("products")
     else:
         f = []
-        qs = Product.objects.all()
-
+        qs = Product.objects.get_queryset().order_by('-id')
         for e in qs:
             data = Product()
             data.id = e.id
@@ -88,7 +95,14 @@ def products(request, user_data):
             data.username = e.username
             f.append(data)
 
-    return render(request, "products.html", {"data": f})
+        final_data = add_pagination(request, f)
+
+    return render(request, "products.html", {"data": final_data})
+
+
+def delproduct(request, id):
+    Product.objects.filter(id=id).delete()
+    return redirect("products")
 
 
 @csrf_exempt

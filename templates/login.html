@@ -63,13 +63,19 @@ a {
 </head>
 <body>
 
-
 <form action="login" method="POST">
 
     {% csrf_token %}
 
     <div class="container">
 
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+               <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
         <h1> <a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> Login Here</h1>
         <p>Please use your username and password to login.</p>

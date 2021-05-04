@@ -1,6 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from products.models import Product
@@ -32,6 +32,7 @@ def register(request):
                     first_name=firstname,
                     last_name=lastname,
                 )
+                messages.success(request, 'User registered successfully.')
                 return redirect("login")
         else:
             return redirect("register")
@@ -57,6 +58,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
+            messages.success(request, 'User logged in successfully.')
             return redirect("products")
         else:
             return redirect("login")
@@ -83,6 +85,7 @@ def products(request):
         price = request.POST.get("price")
 
         Product.objects.create(name=name, price=price, username=request.user.get_full_name())
+        messages.success(request, 'Product added successfully.')
         return redirect("products")
     else:
         f = []
@@ -102,10 +105,12 @@ def products(request):
 
 def delproduct(request, id):
     Product.objects.filter(id=id).delete()
+    messages.success(request, 'Product deleted successfully.')
     return redirect("products")
 
 
 @csrf_exempt
 def logout(request):
     auth.logout(request)
+    messages.success(request, 'Logout Successful.')
     return redirect("/")

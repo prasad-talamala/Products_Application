@@ -66,6 +66,7 @@ TEMPLATES = [
     },
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 WSGI_APPLICATION = 'Django_APP.wsgi.application'
 
 # Database

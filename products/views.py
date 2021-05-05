@@ -35,6 +35,7 @@ def register(request):
                 messages.success(request, 'User registered successfully.')
                 return redirect("login")
         else:
+            messages.error(request, 'User registration Failed. Please try again!!')
             return redirect("register")
 
     else:
@@ -61,6 +62,7 @@ def login(request):
             messages.success(request, 'User logged in successfully.')
             return redirect("products")
         else:
+            messages.error(request, 'Authentication Unsuccessful. Please try again with correct credentials.!!')
             return redirect("login")
 
     else:
@@ -89,7 +91,7 @@ def products(request):
         return redirect("products")
     else:
         f = []
-        qs = Product.objects.get_queryset().order_by('-id')
+        qs = Product.objects.get_queryset().order_by('-id').filter(username=request.user.get_full_name())
         for e in qs:
             data = Product()
             data.id = e.id

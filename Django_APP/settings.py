@@ -24,7 +24,7 @@ SECRET_KEY = 'o1*s@ov+#4v2$u)-3oj+%qy@=q4y%m89h2&948n+!mb^#zq#q$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vtalamala.pythonanywhere.com']
 
 # Application definition
 
@@ -74,11 +74,11 @@ WSGI_APPLICATION = 'Django_APP.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_app',
-        'USER': 'prasad',
-        'PASSWORD': 'prasad',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vtalamala$django_app',
+        'USER': 'vtalamala',
+        'PASSWORD': 'Bi5WFpVbo4SNlzu2',
+        'HOST': 'vtalamala.mysql.pythonanywhere-services.com'
     }
 }
 
@@ -118,8 +118,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGOUT_REDIRECT_URL = 'home'
